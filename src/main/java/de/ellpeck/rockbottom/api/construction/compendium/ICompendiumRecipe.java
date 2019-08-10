@@ -95,4 +95,6 @@ public interface ICompendiumRecipe extends IContent {
                 constructionTable ? ComponentPolaroid.CONSTRUCTION_TEX_HIGHLIGHTED : ComponentPolaroid.DEFAULT_TEX_HIGHLIGHTED,
                 constructionTable ? ComponentPolaroid.CONSTRUCTION_TEX_SELECTED : ComponentPolaroid.DEFAULT_TEX_SELECTED);
     }
+
+    ResourceName getKnowledgeInformationName();
 }

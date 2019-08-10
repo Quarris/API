@@ -37,12 +37,14 @@ public class MortarRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("mortar");
 
+    protected ResourceName infoName;
     protected final List<IUseInfo> input;
     protected final List<ItemInstance> output;
     protected final int time;
 
     public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time) {
         super(name);
+        this.infoName = name.addPrefix("recipe_");
         this.input = input;
         this.output = output;
         this.time = time;
@@ -88,4 +90,9 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     public List<ItemInstance> getOutputs() {
         return this.output;
     }
+
+	@Override
+	public ResourceName getKnowledgeInformationName() {
+		return null;
+	}
 }

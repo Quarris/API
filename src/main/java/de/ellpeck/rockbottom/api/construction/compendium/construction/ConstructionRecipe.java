@@ -110,7 +110,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     public boolean canUseTools(TileEntity machine) {
         if (usesTools()) {
             for (ConstructionTool tool : tools) {
-                if (!RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, true)) {
+                if (!RockBottomAPI.getInternalHooks().useCraftingTool(machine, tool, true)) {
                     return false;
                 }
             }
@@ -134,7 +134,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
                 return false;
             }
             for (ConstructionTool tool : tools) {
-                RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, false);
+                RockBottomAPI.getInternalHooks().useCraftingTool(machine, tool, false);
             }
         }
         return true;

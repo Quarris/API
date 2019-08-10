@@ -21,12 +21,13 @@
 
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IKnowledgeManager {
 
-    boolean knowsRecipe(ConstructionRecipe recipe);
+    boolean knowsRecipe(ICompendiumRecipe recipe);
 
     boolean knowsInformation(ResourceName name);
 

@@ -74,13 +74,13 @@ public interface IInternalHooks {
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
     /**
-     * Checks if the tile entity is a construction table, and if it has a tool
+     * Checks if the tile entity is a crafting station, and if it has a tool
      * @param constructionTable
      * @param tool
      * @param simulate
      * @return
      */
-    boolean useConstructionTableTool(TileEntity constructionTable, ConstructionTool tool, boolean simulate);
+    boolean useCraftingTool(TileEntity constructionTable, ConstructionTool tool, boolean simulate);
 
     //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);

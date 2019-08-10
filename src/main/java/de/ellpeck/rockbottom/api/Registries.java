@@ -127,9 +127,9 @@ public final class Registries {
     /**
      * The registry for all {@link ConstructionRecipe} objects that are
      * displayed on the left side of the player's inventory. Use {@link
-     * ConstructionRecipe#register()} to register recipes into this
+     * ConstructionRecipe#registerManual()} to register recipes into this
      * registry. If you want to get a recipe instance by its name, use {@link
-     * ConstructionRecipe#forName(ResourceName)}.
+     * ConstructionRecipe#getManual(ResourceName)}.
      */
     @ApiInternal
     public static final NameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>(ResourceName.intern("manual_recipe_registry"), true).register();
@@ -141,6 +141,14 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true).register();
+	/**
+	 * The recipe for all {@link ConstructionRecipe} objects which require
+	 * a tool to be crafted. These show up in a separate tab to manual recipes
+	 * in the Compendium and can be crafted with the use of a tool in the
+	 * ConstructionTable.
+	 */
+	@ApiInternal
+	public static final NameRegistry<ConstructionRecipe> SMITHING_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("smithing_table_recipe_registry"), true).register();
     /**
      * The registry for all {@link MortarRecipe} objects that can be processed
      * in a mortar. To register something into this registry, please use  {@link

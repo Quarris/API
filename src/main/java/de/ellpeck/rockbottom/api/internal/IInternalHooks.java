@@ -127,5 +127,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, ConstructionRecipe recipe, TileEntity machine);
+    void defaultConstruct(AbstractEntityPlayer player, ICompendiumRecipe recipe, TileEntity machine);
 }

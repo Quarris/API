@@ -21,8 +21,10 @@
 
 package de.ellpeck.rockbottom.api.construction.compendium;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
@@ -31,6 +33,7 @@ import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.ICraftingStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -66,6 +69,14 @@ public interface ICompendiumRecipe extends IContent {
         return true;
     }
 
+    default void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
+		Inventory inv = player.getInv();
+		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+		for (ItemInstance instance : remains) {
+			AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
+		}
+	}
+
     default List<IUseInfo> getActualInputs(IInventory inventory) {
         return this.getInputs();
     }
@@ -74,6 +85,9 @@ public interface ICompendiumRecipe extends IContent {
         return this.getOutputs();
     }
 
+    default float getSkillReward() {
+    	return 0;
+	}
 
     default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player, boolean constructionTable) {
         List<ComponentIngredient> ingredients = new ArrayList<>();

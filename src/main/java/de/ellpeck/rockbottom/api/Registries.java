@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
 import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.smithing.SmithingRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
@@ -54,10 +55,7 @@ import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IRegistry;
-import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
-import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
-import de.ellpeck.rockbottom.api.util.reg.ResourceName;
+import de.ellpeck.rockbottom.api.util.reg.*;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.SubWorldInitializer;
 import de.ellpeck.rockbottom.api.world.gen.IStructure;
@@ -135,6 +133,7 @@ public final class Registries {
      */
     public static final NameRegistry<ICriteria> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
     /**
+	 * //TODO 0.4
      * The registry for all {@link ConstructionRecipe} objects that are
      * displayed on the left side of the player's inventory. Use {@link
      * ConstructionRecipe#registerManual()} to register recipes into this
@@ -142,7 +141,16 @@ public final class Registries {
      * ConstructionRecipe#getManual(ResourceName)}.
      */
     @ApiInternal
-    public static final NameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>(ResourceName.intern("manual_recipe_registry"), true).register();
+	public static final NameRegistry<ICompendiumRecipe> ALL_RECIPES = new NameRegistry<>(ResourceName.intern("all_recipes"), true).register();
+	/**
+	 * The registry for all {@link ConstructionRecipe} objects that are
+	 * displayed on the left side of the player's inventory. Use {@link
+	 * ConstructionRecipe#registerManual()} to register recipes into this
+	 * registry. If you want to get a recipe instance by its name, use {@link
+	 * ConstructionRecipe#getManual(ResourceName)}.
+	 */
+    @ApiInternal
+    public static final ParentedNameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("manual_recipe_registry"), true, ALL_RECIPES).register();
     /**
      * The recipe for all {@link ConstructionRecipe} objects which require
      * a tool to be crafted. These show up in a separate tab to manual recipes
@@ -151,7 +159,7 @@ public final class Registries {
      * to register.
      */
     @ApiInternal
-    public static final NameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true).register();
+    public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true, ALL_RECIPES).register();
 	/**
 	 * The recipe for all {@link ConstructionRecipe} objects which require
 	 * a tool to be crafted. These show up in a separate tab to manual recipes
@@ -159,7 +167,7 @@ public final class Registries {
 	 * ConstructionTable.
 	 */
 	@ApiInternal
-	public static final NameRegistry<ConstructionRecipe> SMITHING_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("smithing_table_recipe_registry"), true).register();
+	public static final ParentedNameRegistry<SmithingRecipe> SMITHING_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("smithing_table_recipe_registry"), true, ALL_RECIPES).register();
     /**
      * The registry for all {@link MortarRecipe} objects that can be processed
      * in a mortar. To register something into this registry, please use  {@link

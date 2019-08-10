@@ -66,14 +66,6 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         this(output.getItem().getName(), tools, skillReward, output, inputs);
     }
 
-    public static ConstructionRecipe getManual(ResourceName name) {
-        return Registries.MANUAL_CONSTRUCTION_RECIPES.get(name);
-    }
-
-	public static ConstructionRecipe getConstruction(ResourceName name) {
-		return Registries.CONSTRUCTION_TABLE_RECIPES.get(name);
-	}
-
     @Override
     public List<IUseInfo> getInputs() {
         return this.inputs;
@@ -101,13 +93,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         return this.skillReward;
     }
 
-    public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
-        Inventory inv = player.getInv();
-        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
-        for (ItemInstance instance : remains) {
-            AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
-        }
-    }
+
 
     public boolean canUseTools(TileEntity machine) {
         if (usesTools()) {

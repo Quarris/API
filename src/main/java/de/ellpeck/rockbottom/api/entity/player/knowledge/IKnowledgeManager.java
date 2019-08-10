@@ -35,17 +35,17 @@ public interface IKnowledgeManager {
 
     <T extends Information> T getInformation(ResourceName name, Class<T> infoClass);
 
-    void teachRecipe(ConstructionRecipe recipe, boolean announce);
+    void teachRecipe(ICompendiumRecipe recipe, boolean announce);
 
-    void teachRecipe(ConstructionRecipe recipe);
+    void teachRecipe(ICompendiumRecipe recipe);
 
     void teachInformation(Information information, boolean announce);
 
     void teachInformation(Information information);
 
-    void forgetRecipe(ConstructionRecipe recipe, boolean announce);
+    void forgetRecipe(ICompendiumRecipe recipe, boolean announce);
 
-    void forgetRecipe(ConstructionRecipe recipe);
+    void forgetRecipe(ICompendiumRecipe recipe);
 
     void forgetInformation(ResourceName name, boolean announce);
 

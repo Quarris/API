@@ -35,4 +35,9 @@ public abstract class BasicCompendiumRecipe implements ICompendiumRecipe {
     public ResourceName getName() {
         return this.name;
     }
+
+	@Override
+	public ResourceName getKnowledgeInformationName() {
+		return name.addPrefix("recipe_");
+	}
 }

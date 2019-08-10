@@ -86,7 +86,12 @@ public class SmeltingRecipe extends BasicCompendiumRecipe {
         return Collections.singletonList(this.getOutput());
     }
 
-    public SmeltingRecipe register() {
+	@Override
+	public ResourceName getKnowledgeInformationName() {
+		return null;
+	}
+
+	public SmeltingRecipe register() {
         Registries.SMELTING_REGISTRY.register(this.getName(), this);
         return this;
     }

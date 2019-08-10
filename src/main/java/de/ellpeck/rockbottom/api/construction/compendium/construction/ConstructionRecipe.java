@@ -66,9 +66,13 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         this(output.getItem().getName(), tools, skillReward, output, inputs);
     }
 
-    public static ConstructionRecipe forName(ResourceName name) {
+    public static ConstructionRecipe getManual(ResourceName name) {
         return Registries.MANUAL_CONSTRUCTION_RECIPES.get(name);
     }
+
+	public static ConstructionRecipe getConstruction(ResourceName name) {
+		return Registries.CONSTRUCTION_TABLE_RECIPES.get(name);
+	}
 
     @Override
     public List<IUseInfo> getInputs() {
@@ -125,7 +129,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         });
     }
 
-    @Override
+	@Override
     public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         if (usesTools()) {
             if (!canUseTools(machine)) {
